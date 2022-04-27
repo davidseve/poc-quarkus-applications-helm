@@ -1,36 +1,36 @@
-offers-green:
+discounts-green:
   replicaCount: 1
   image:
     tag: "latest"
 
-offersNetworkingOnline:
+discountsNetworkingOnline:
    version: blue
 
-offers-blue:
+discounts-blue:
   replicaCount: 2
   image:
     tag: "latest"
 
-offersNetworkingOffline:
+discountsNetworkingOffline:
    version: green
 
-#Step1 Upgrade Offers OffLine for testing
-# offers-green:
+#Step1 Upgrade Discounts OffLine for testing
+# discounts-green:
 #   image:
 #     tag: "v1"
 
-#Step2 Scale up Offers Offline (new version)
-# offers-green:
+#Step2 Scale up Discounts Offline (new version)
+# discounts-green:
 #   replicaCount: 2
 
-#Step3 Switch Offers new version to Online
-# offersNetworkingOnline:
+#Step3 Switch Discounts new version to Online
+# discountsNetworkingOnline:
 #    version: green
 
-#Step4 Offers old version Scale down, aligne version and switch to OffLine
-# offers-blue:
+#Step4 Discounts old version Scale down, aligne version and switch to OffLine
+# discounts-blue:
 #   replicaCount: 1
 #   image:
 #     tag: "v1"
-# offersNetworkingOffline:
+# discountsNetworkingOffline:
 #    version: blue

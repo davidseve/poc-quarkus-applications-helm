@@ -24,26 +24,26 @@ version: 0.1.0
 appVersion: "1.16.0"
 
 dependencies:
-  - name: quarkus-helm-offers
+  - name: quarkus-helm-discounts
     version: 0.1.0
-    alias: offers-blue
+    alias: discounts-blue
     tags:
-      - offers-blue
-  - name: quarkus-helm-offers
+      - discounts-blue
+  - name: quarkus-helm-discounts
     version: 0.1.0
-    alias: offers-green
+    alias: discounts-green
     tags:
-      - offers-green
+      - discounts-green
   - name: quarkus-base-networking
     version: 0.1.0
-    alias: offersNetworkingOnline  
+    alias: discountsNetworkingOnline  
     tags:
-      - offersNetworkingOnline
+      - discountsNetworkingOnline
   - name: quarkus-base-networking
     version: 0.1.0
-    alias: offersNetworkingOffline
+    alias: discountsNetworkingOffline
     tags:
-      - offersNetworkingOffline
+      - discountsNetworkingOffline
   - name: quarkus-helm-products
     version: 0.1.0
     alias: products-blue

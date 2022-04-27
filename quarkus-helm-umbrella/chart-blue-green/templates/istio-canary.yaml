@@ -60,34 +60,34 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ include "shop.fullname" $ }}-vs-offers
+  name: {{ include "shop.fullname" $ }}-vs-discounts
   labels:
     {{- include "shop.labels" . | nindent 4 }}
 spec:
   hosts:
-  - {{ .Values.offersNetworkingOnline.fullnameOverride }}
+  - {{ .Values.discountsNetworkingOnline.fullnameOverride }}
   http:
   - match:
     - uri:
-        exact: /offers
+        exact: /discounts
     route:
     - destination:
-        host: {{ .Values.offersNetworkingOnline.fullnameOverride }}
+        host: {{ .Values.discountsNetworkingOnline.fullnameOverride }}
         subset: blue
-      weight: {{ .Values.global.istio.offersblueWeight}}
+      weight: {{ .Values.global.istio.discountsblueWeight}}
     - destination:
-        host: {{ .Values.offersNetworkingOnline.fullnameOverride }}
+        host: {{ .Values.discountsNetworkingOnline.fullnameOverride }}
         subset: green
-      weight: {{ .Values.global.istio.offersgreenWeight}}
+      weight: {{ .Values.global.istio.discountsgreenWeight}}
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: {{ include "shop.fullname" $ }}-offers-rule
+  name: {{ include "shop.fullname" $ }}-discounts-rule
   labels:
     {{- include "shop.labels" . | nindent 4 }}
 spec:
-  host: {{ .Values.offersNetworkingOnline.fullnameOverride }}
+  host: {{ .Values.discountsNetworkingOnline.fullnameOverride }}
   subsets:
   - name: blue
     labels:

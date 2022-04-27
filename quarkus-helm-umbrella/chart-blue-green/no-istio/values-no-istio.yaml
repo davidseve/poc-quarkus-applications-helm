@@ -1,6 +1,6 @@
-offersNetworkingOnline:
+discountsNetworkingOnline:
   version: blue
-offersNetworkingOffline:
+discountsNetworkingOffline:
   version: green
 
 productsNetworkingOnline:
@@ -16,22 +16,22 @@ products-green:
   replicaCount: 1
   image:
     tag: "latest"
-  offersApi:
+  discountsApi:
     #has to change when product on/offline change
-    url: http://offers-umbrella-offline:8080 
+    url: http://discounts-umbrella-offline:8080 
 products-blue:
   replicaCount: 2
   image:
     tag: "latest"
-  offersApi:
+  discountsApi:
     #has to change when product on/offline change
-    url: http://offers-umbrella-online:8080
+    url: http://discounts-umbrella-online:8080
 
-offers-green:
+discounts-green:
   replicaCount: 1
   image:
     tag: latest
-offers-blue:
+discounts-blue:
   replicaCount: 2
   image:
     tag: "latest"

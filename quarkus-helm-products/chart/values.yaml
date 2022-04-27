@@ -1,4 +1,4 @@
-# Default values for offers.
+# Default values for discounts.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -8,8 +8,8 @@ jaeger:
   endpoint: http://jaeger-collector.istio-system.svc:14268/api/traces
 log:
   level: INFO 
-offersApi:
-  url: http://offers:8080
+discountsApi:
+  url: http://discounts:8080
 
 fullnameOverride: ""
 

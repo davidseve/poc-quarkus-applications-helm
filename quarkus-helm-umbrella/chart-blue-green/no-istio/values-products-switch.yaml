@@ -2,8 +2,8 @@ products-green:
   replicaCount: 1
   image:
     tag: "latest"
-  offersApi:
-     url: http://offers-umbrella-offline:8080 
+  discountsApi:
+     url: http://discounts-umbrella-offline:8080 
 
 productsNetworkingOnline:
    version: blue
@@ -12,9 +12,9 @@ products-blue:
    replicaCount: 2
    image:
     tag: "latest"
-   offersApi:
+   discountsApi:
     #has to change when product on/offline change
-    url: http://offers-umbrella-online:8080
+    url: http://discounts-umbrella-online:8080
 
 productsNetworkingOffline:
    version: green
@@ -27,8 +27,8 @@ productsNetworkingOffline:
 #Step2 Change configuration Products Offline (new version)
 # products-green:
 #    replicaCount: 0
-#    offersApi:
-#      url: http://offers-umbrella-online:8080 
+#    discountsApi:
+#      url: http://discounts-umbrella-online:8080 
 
 #Step3 Scale up Products Offline (new version)
 # products-green:
@@ -43,9 +43,9 @@ productsNetworkingOffline:
 #    replicaCount: 1
 #    image:
 #     tag: "v1"
-#    offersApi:
+#    discountsApi:
 #     #has to change when product on/offline change
-#     url: http://offers-umbrella-offline:8080
+#     url: http://discounts-umbrella-offline:8080
 # productsNetworkingOffline:
 #    version: blue
   

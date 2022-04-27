@@ -1,24 +1,24 @@
-#Offers
-#Step1 Upgrade Offers OffLine for testing
-# offers-green:
+#Discounts
+#Step1 Upgrade Discounts OffLine for testing
+# discounts-green:
 #   image:
 #     tag: "v1"
 #   replicaCount: 2
 
-#Step2 Switch Offers new version 10%
+#Step2 Switch Discounts new version 10%
 # global:
 #   istio:
-#     offersblueWeight: 90
-#     offersgreenWeight: 10
+#     discountsblueWeight: 90
+#     discountsgreenWeight: 10
 
-#Step2 Switch Offers new version 10%
+#Step2 Switch Discounts new version 10%
 # global:
 #   istio:
-#     offersblueWeight: 0
-#     offersgreenWeight: 100
+#     discountsblueWeight: 0
+#     discountsgreenWeight: 100
 
-#Step4 Offers old version Scale down, aligne version and switch to OffLine
-# offers-blue:
+#Step4 Discounts old version Scale down, aligne version and switch to OffLine
+# discounts-blue:
 #   replicaCount: 0
 #   image:
 #     tag: "v1"
