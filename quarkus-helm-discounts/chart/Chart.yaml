@@ -1,5 +1,5 @@
 apiVersion: v2
-name: quarkus-helm-offers
+name: quarkus-helm-discounts
 description: A Helm chart for Quarkus
 
 # A chart can be either an 'application' or a 'library' chart.

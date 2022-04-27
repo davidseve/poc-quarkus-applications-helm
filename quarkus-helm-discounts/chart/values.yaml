@@ -1,8 +1,8 @@
-# Default values for offers.
+# Default values for discounts.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-nameOverride: offers
+nameOverride: discounts
 
 jaeger:
   endpoint: http://jaeger-collector.istio-system.svc:14268/api/traces
@@ -23,7 +23,7 @@ replicaCount: 1
 
 image:
   pullPolicy: Always
-  repository: quay.io/dseveria/offers
+  repository: quay.io/dseveria/discounts
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
   
