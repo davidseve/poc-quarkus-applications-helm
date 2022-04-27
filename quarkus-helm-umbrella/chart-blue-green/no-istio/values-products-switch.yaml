@@ -1,0 +1,60 @@
+products-green:
+  replicaCount: 1
+  image:
+    tag: "latest"
+  offersApi:
+     url: http://offers-umbrella-offline:8080 
+
+productsNetworkingOnline:
+   version: blue
+
+products-blue:
+   replicaCount: 2
+   image:
+    tag: "latest"
+   offersApi:
+    #has to change when product on/offline change
+    url: http://offers-umbrella-online:8080
+
+productsNetworkingOffline:
+   version: green
+
+#Step1 Upgrade Products Offline for testing
+# products-green:
+#   image:
+#     tag: "v1"
+
+#Step2 Change configuration Products Offline (new version)
+# products-green:
+#    replicaCount: 0
+#    offersApi:
+#      url: http://offers-umbrella-online:8080 
+
+#Step3 Scale up Products Offline (new version)
+# products-green:
+#    replicaCount: 2
+
+#Step4 Switch Products new version to Online
+# productsNetworkingOnline:
+#    version: green
+
+#Step5 Products old version Scale down, align version and switch to OffLine
+# products-blue:
+#    replicaCount: 1
+#    image:
+#     tag: "v1"
+#    offersApi:
+#     #has to change when product on/offline change
+#     url: http://offers-umbrella-offline:8080
+# productsNetworkingOffline:
+#    version: blue
+  
+
+
+
+
+
+
+
+
+

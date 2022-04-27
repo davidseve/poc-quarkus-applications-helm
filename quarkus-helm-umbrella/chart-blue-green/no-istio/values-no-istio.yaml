@@ -1,0 +1,42 @@
+offersNetworkingOnline:
+  version: blue
+offersNetworkingOffline:
+  version: green
+
+productsNetworkingOnline:
+  version: blue
+  router:
+    enabled: true
+productsNetworkingOffline:
+  version: green
+  router:
+    enabled: true
+
+products-green:
+  replicaCount: 1
+  image:
+    tag: "latest"
+  offersApi:
+    #has to change when product on/offline change
+    url: http://offers-umbrella-offline:8080 
+products-blue:
+  replicaCount: 2
+  image:
+    tag: "latest"
+  offersApi:
+    #has to change when product on/offline change
+    url: http://offers-umbrella-online:8080
+
+offers-green:
+  replicaCount: 1
+  image:
+    tag: latest
+offers-blue:
+  replicaCount: 2
+  image:
+    tag: "latest"
+
+global:
+  istio:
+    enabled: false
+

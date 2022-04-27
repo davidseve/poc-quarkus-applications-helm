@@ -1,0 +1,41 @@
+tags:
+  productsNetworkingOffline: false
+  offersNetworkingOffline: false
+
+offersNetworkingOnline:
+  router:
+    enabled: false
+
+productsNetworkingOnline:
+  router:
+    enabled: false
+
+global:
+  istio:
+    enabled: true
+    productsblueWeight: 100
+    productsgreenWeight: 0
+    offersblueWeight: 100
+    offersgreenWeight: 0
+
+
+products-green:
+  replicaCount: 0
+  image:
+    tag: "latest"
+
+products-blue:
+  replicaCount: 2
+  image:
+    tag: "latest"
+
+
+offers-green:
+  replicaCount: 0
+  image:
+    tag: "latest"
+offers-blue:
+  replicaCount: 2
+  image:
+    tag: "latest"
+

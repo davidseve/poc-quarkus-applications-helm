@@ -1,0 +1,91 @@
+# Default values for offers.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+offers-blue:
+  replicaCount: 2
+  nameOverride: offers-umbrella
+  fullnameOverride: "offers-blue"
+  log:
+    level: DEBUG
+  version: blue
+  image:
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8443"
+    prometheus.io/scheme: "https"
+offers-green:
+  nameOverride: offers-umbrella
+  fullnameOverride: "offers-green"
+  log:
+    level: DEBUG 
+  version: green
+  image:
+    tag: "latest"
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8443"
+    prometheus.io/scheme: "https"    
+offersNetworkingOnline:
+  nameOverride: offers-umbrella
+  fullnameOverride: "offers-umbrella-online"
+  router:
+    enabled: false
+offersNetworkingOffline:
+  nameOverride: offers-umbrella
+  fullnameOverride: "offers-umbrella-offline"
+  router:
+    enabled: false
+    
+products-blue:
+  replicaCount: 2
+  nameOverride: products-umbrella
+  fullnameOverride: "products-blue"
+  log:
+    level: DEBUG
+  offersApi:
+    url: http://offers-umbrella-online:8080
+  version: blue
+  image:
+    tag: "latest"
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8443"
+    prometheus.io/scheme: "https"
+products-green:
+  nameOverride: products-umbrella
+  fullnameOverride: "products-green"
+  log:
+    level: DEBUG
+  offersApi:
+    url: http://offers-umbrella-online:8080
+  version: green
+  image:
+    tag: "latest"
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8443"
+    prometheus.io/scheme: "https" 
+productsNetworkingOnline:
+  nameOverride: products-umbrella
+  fullnameOverride: products-umbrella-online
+
+productsNetworkingOffline:
+  nameOverride: products-umbrella
+  fullnameOverride: "products-umbrella-offline"
+
+global:
+  istio:
+    enabled: false
+
+nameOverride: "shop-umbrella" 
+
+fullnameOverride: ""
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shop-blue-green
+spec:
+  destination:
+    name: ''
+    namespace: quarkus-gitops
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: chart-blue-green
+    repoURL: 'https://github.com/davidseve/quarkus-helm-umbrella.git'
+    targetRevision: blue-green
+    helm:
+      valueFiles:
+        - no-istio/values-no-istio.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false

@@ -1,0 +1,36 @@
+offers-green:
+  replicaCount: 1
+  image:
+    tag: "latest"
+
+offersNetworkingOnline:
+   version: blue
+
+offers-blue:
+  replicaCount: 2
+  image:
+    tag: "latest"
+
+offersNetworkingOffline:
+   version: green
+
+#Step1 Upgrade Offers OffLine for testing
+# offers-green:
+#   image:
+#     tag: "v1"
+
+#Step2 Scale up Offers Offline (new version)
+# offers-green:
+#   replicaCount: 2
+
+#Step3 Switch Offers new version to Online
+# offersNetworkingOnline:
+#    version: green
+
+#Step4 Offers old version Scale down, aligne version and switch to OffLine
+# offers-blue:
+#   replicaCount: 1
+#   image:
+#     tag: "v1"
+# offersNetworkingOffline:
+#    version: blue
