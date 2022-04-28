@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: shop-discounts-new-version-
+spec:
+  pipelineRef:
+    name: new-version-quarkus-application    
+  params:
+  - name: APP
+    value: discounts
+  - name: NEW_IMAGE_TAG
+    value: "v1"
+  - name: STEP
+    value: "new-version"
+  - name: SOURCE_GIT_REVISION
+    value: blue-green
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: workspace-pvc-shop-cd-new-version

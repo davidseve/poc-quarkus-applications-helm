@@ -1,0 +1,195 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: new-version-quarkus-application
+spec:
+  params:
+  - name: HELM_RELEASE_NAME
+    type: string
+    default: shop-blue-green
+    description: The application deployment name
+  - name: SOURCE_GIT_URL
+    type: string
+    default: https://github.com/davidseve/quarkus-helm-umbrella.git
+    description: The application git repository url
+  - name: SOURCE_GIT_REVISION
+    type: string
+    default: main
+    description: The application git repository revision
+  - name: CONTEXT_DIR
+    type: string
+    default: "chart-blue-green"
+    description: The subdirectory in the git repository
+  - name: HELM_RELEASE_VERSION
+    type: string
+    default: v1.0.0
+    description: Helm release version
+  - name: NAMESPACE
+    type: string
+    default: poc-quarkus
+    description: namespace
+  - name: OVERWRITE_VALUES
+    type: string
+    default: ""
+  - name: VALUES_FILE
+    type: string
+    default: "no-istio/values-no-istio.yaml" 
+  - name: APP
+    type: string
+    description: discounts or products
+  - name: NEW_IMAGE_TAG
+    type: string
+    default: None
+
+  - name: REPLICA_COUNT
+    type: string
+    default: None
+
+  - name: STEP
+    type: string
+
+    
+
+  workspaces:
+  - name: app-source
+
+  tasks:
+  - name: git-clone
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    params:
+    - name: url
+      value: $(params.SOURCE_GIT_URL)
+    - name: revision
+      value: $(params.SOURCE_GIT_REVISION)
+    - name: deleteExisting
+      value: 'true'
+    workspaces:
+    - name: output
+      workspace: app-source
+
+
+  - name: get-offline-colour
+    taskRef:
+      name: openshift-client
+    params:
+    - name: SCRIPT
+      value: |
+        oc get service $(params.APP)-umbrella-offline -n $(params.NAMESPACE) --output="jsonpath={.spec.selector.version}" > $(workspaces.manifest-dir.path)/version
+        cat $(workspaces.manifest-dir.path)/version
+    workspaces:
+    - name: manifest-dir
+      workspace: app-source
+
+  - name: create-result-colour
+    runAfter:
+    - get-offline-colour
+    taskSpec:
+      steps:
+      - name: set-results
+        image: registry.access.redhat.com/ubi8/ubi-minimal:8.3
+        script: |
+          #!/usr/bin/env bash
+          cat $(workspaces.manifest-dir.path)/version
+          cat $(workspaces.manifest-dir.path)/version > tekton/results/version
+      results:
+      - name: version
+      workspaces:
+      - name: manifest-dir
+    workspaces:
+    - name: manifest-dir
+      workspace: app-source
+
+  - name: helm-upgrade-new-image-tag
+    when:
+      - input: "$(params.STEP)"
+        operator: in
+        values: ["new-version"]
+    runAfter:
+    - create-result-colour
+    - git-clone
+    taskRef:
+      name: helm-upgrade-from-source
+    params:
+    - name: charts_dir
+      value: $(params.CONTEXT_DIR)
+    - name: release_version
+      value: $(params.HELM_RELEASE_VERSION)
+    - name: release_name
+      value: $(params.HELM_RELEASE_NAME)
+    - name: release_namespace
+      value: $(params.NAMESPACE)
+    - name: overwrite_values
+      value: $(params.APP)-$(tasks.create-result-colour.results.version).image.tag=$(params.NEW_IMAGE_TAG)
+    - name: values_file
+      value: $(params.VALUES_FILE)
+    workspaces:
+    - name: source
+      workspace: app-source
+
+  - name: helm-upgrade-scale
+    when:
+      - input: "$(params.STEP)"
+        operator: in
+        values: ["new-version-scale"]
+    runAfter:
+    - create-result-colour
+    - git-clone
+    taskRef:
+      name: helm-upgrade-from-source
+    params:
+    - name: charts_dir
+      value: $(params.CONTEXT_DIR)
+    - name: release_version
+      value: $(params.HELM_RELEASE_VERSION)
+    - name: release_name
+      value: $(params.HELM_RELEASE_NAME)
+    - name: release_namespace
+      value: $(params.NAMESPACE)
+    - name: overwrite_values
+      value: $(params.APP)-$(tasks.create-result-colour.results.version).image.tag=$(params.NEW_IMAGE_TAG),$(params.APP)-$(tasks.create-result-colour.results.version).replicaCount=$(params.REPLICA_COUNT)
+    - name: values_file
+      value: $(params.VALUES_FILE)
+    workspaces:
+    - name: source
+      workspace: app-source
+
+  - name: helm-upgrade-switch
+    when:
+      - input: "$(params.STEP)"
+        operator: in
+        values: ["switch"]
+    runAfter:
+    - create-result-colour
+    - git-clone
+    taskRef:
+      name: helm-upgrade-from-source
+    params:
+    - name: charts_dir
+      value: $(params.CONTEXT_DIR)
+    - name: release_version
+      value: $(params.HELM_RELEASE_VERSION)
+    - name: release_name
+      value: $(params.HELM_RELEASE_NAME)
+    - name: release_namespace
+      value: $(params.NAMESPACE)
+    - name: overwrite_values
+      value: $(params.APP)NetworkingOnline.version=$(tasks.create-result-colour.results.version),$(params.APP)-$(tasks.create-result-colour.results.version).image.tag=$(params.NEW_IMAGE_TAG),$(params.APP)-$(tasks.create-result-colour.results.version).replicaCount=$(params.REPLICA_COUNT)
+    - name: values_file
+      value: $(params.VALUES_FILE)
+    workspaces:
+    - name: source
+      workspace: app-source
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: workspace-pvc-shop-cd-new-version
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

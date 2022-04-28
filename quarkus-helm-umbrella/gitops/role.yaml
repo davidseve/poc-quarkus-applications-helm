@@ -1,0 +1,9 @@
+apiVersion: authorization.openshift.io/v1
+kind: Role
+metadata:
+  namespace: quarkus-gitops
+  name: argocd-edit-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]

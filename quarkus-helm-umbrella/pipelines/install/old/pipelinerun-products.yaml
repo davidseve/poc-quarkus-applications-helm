@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: pipeline-products-cd-
+spec:
+  pipelineRef:
+    name: deploy-quarkus-application
+  params:
+  - name: HELM_RELEASE_NAME
+    value: products-v1
+  - name: CONTEXT_DIR
+    value: products
+  - name: OVERWRITE_VALUES
+    value: "version=v1"
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: workspace-pvc-products-cd-install
+  - name: maven-settings
+    emptyDir: {}

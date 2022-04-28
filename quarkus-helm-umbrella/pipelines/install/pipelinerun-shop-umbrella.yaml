@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: pipeline-shop-cd-install
+spec:
+  pipelineRef:
+    name: deploy-quarkus-application    
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: workspace-pvc-shop-cd-install
