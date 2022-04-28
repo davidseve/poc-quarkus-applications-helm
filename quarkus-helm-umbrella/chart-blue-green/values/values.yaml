@@ -30,11 +30,11 @@ products-blue:
 discounts-green:
   replicaCount: 1
   image:
-    tag: latest
+    tag: v2
 discounts-blue:
   replicaCount: 2
   image:
-    tag: "latest"
+    tag: v2
 
 global:
   istio:
