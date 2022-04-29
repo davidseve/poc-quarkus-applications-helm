@@ -3,7 +3,7 @@
 oc new-project poc-pipelines
 
 
-export TOKEN=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
+export TOKEN=XXXXX
 
 oc policy add-role-to-user    edit    system:serviceaccount:poc-pipelines:pipeline    --rolebinding-name=pipeline-edit    -n quarkus-gitops
 
