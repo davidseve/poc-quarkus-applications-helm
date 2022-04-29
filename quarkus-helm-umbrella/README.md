@@ -25,6 +25,7 @@ oc apply -f application-blue-green.yaml -n openshift-gitops
 
 Test:
 http://products-umbrella-online-quarkus-gitops.apps-crc.testing/products
+
 http://products-umbrella-offline-quarkus-gitops.apps-crc.testing/products
 
 
@@ -33,6 +34,7 @@ http://products-umbrella-offline-quarkus-gitops.apps-crc.testing/products
 cd pipelines
 
 oc apply -f continuos-deployment/pipeline.yaml -n poc-pipelines
+
 export FOLDER=blue-green
 
 ### Step1 Upgrade Products Offline for testing
