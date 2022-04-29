@@ -8,8 +8,8 @@ spec:
     namespace: quarkus-gitops
     server: 'https://kubernetes.default.svc'
   source:
-    path: chart-blue-green
-    repoURL: 'https://github.com/davidseve/quarkus-helm-umbrella.git'
+    path: quarkus-helm-umbrella/chart-blue-green
+    repoURL: 'https://github.com/davidseve/poc-quarkus-applications-helm.git'
     targetRevision: istio
     helm:
       valueFiles:

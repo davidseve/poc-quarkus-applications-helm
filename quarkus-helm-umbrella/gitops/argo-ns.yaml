@@ -8,8 +8,8 @@ spec:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: gitops/cluster-config
-    repoURL: 'https://github.com/davidseve/PoC.git'
+    path: quarkus-helm-umbrella/gitops/cluster-config
+    repoURL: 'https://github.com/davidseve/poc-quarkus-applications-helm.git'
     targetRevision: HEAD
     directory:
       recurse: true
