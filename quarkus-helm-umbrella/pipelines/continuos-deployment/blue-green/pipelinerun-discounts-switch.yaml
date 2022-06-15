@@ -1,17 +1,19 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: shop-products-scale-down-offline-
+  generateName: shop-discounts-switch-
 spec:
   pipelineRef:
-    name: new-version-quarkus-application    
+    name: pipeline-blue-green    
   params:
   - name: APP
-    value: products
+    value: discounts
   - name: NEW_IMAGE_TAG
-    value: "v2"
+    value: "v1"
+  - name: REPLICA_COUNT
+    value: "2"
   - name: STEP
-    value: "scale-down-offline"
+    value: "switch"
   - name: SOURCE_GIT_REVISION
     value: blue-green
   workspaces:

@@ -1,17 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: shop-discounts-scale-up-
+  generateName: shop-products-change-configuration-
 spec:
   pipelineRef:
-    name: new-version-quarkus-application    
+    name: pipeline-blue-green    
   params:
   - name: APP
-    value: discounts
-  - name: REPLICA_COUNT
-    value: "2"
+    value: products
   - name: STEP
-    value: "new-version-scale-up"
+    value: "change-configuration"
   - name: SOURCE_GIT_REVISION
     value: blue-green
   workspaces:

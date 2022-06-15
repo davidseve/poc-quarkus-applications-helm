@@ -1,15 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: shop-discounts-new-version-
+  generateName: shop-products-new-version-
 spec:
   pipelineRef:
-    name: new-version-quarkus-application    
+    name: pipeline-blue-green    
   params:
   - name: APP
-    value: discounts
+    value: products
   - name: NEW_IMAGE_TAG
-    value: "v1"
+    value: "v1.1.0"
   - name: STEP
     value: "new-version"
   - name: SOURCE_GIT_REVISION
