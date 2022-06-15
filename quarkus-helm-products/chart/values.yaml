@@ -19,6 +19,9 @@ service:
 
 replicaCount: 1
 
+version: none
+mode: none
+
 image:
   pullPolicy: Always
   repository: quay.io/dseveria/products

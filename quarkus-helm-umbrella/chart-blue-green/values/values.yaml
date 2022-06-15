@@ -13,25 +13,23 @@ productsNetworkingOffline:
     enabled: true
 
 products-green:
+  mode: offline
   replicaCount: 1
   image:
     tag: v1.0.0
-  discountsApi:
-    #has to change when product on/offline change
-    url: http://discounts-umbrella-offline:8080 
 products-blue:
+  mode: online
   replicaCount: 2
   image:
     tag: v1.0.0
-  discountsApi:
-    #has to change when product on/offline change
-    url: http://discounts-umbrella-online:8080
 
 discounts-green:
+  mode: offline
   replicaCount: 1
   image:
     tag: v1.0.0
 discounts-blue:
+  mode: online
   replicaCount: 2
   image:
     tag: v1.0.0
