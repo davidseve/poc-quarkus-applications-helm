@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: new-version-quarkus-application
+  name: pipeline-blue-green
 spec:
   params:
   - name: HELM_RELEASE_NAME
