@@ -13,28 +13,24 @@ productsNetworkingOffline:
     enabled: true
 
 products-green:
-  mode: offline
   replicaCount: 1
   image:
     tag: v1.0.0
+  mode: offline
 products-blue:
-  mode: online
   replicaCount: 2
   image:
     tag: v1.0.0
+  mode: online
 
 discounts-green:
-  mode: offline
   replicaCount: 1
   image:
     tag: v1.0.0
+  mode: offline
 discounts-blue:
-  mode: online
   replicaCount: 2
   image:
     tag: v1.0.0
-
-global:
-  istio:
-    enabled: false
+  mode: online
 
