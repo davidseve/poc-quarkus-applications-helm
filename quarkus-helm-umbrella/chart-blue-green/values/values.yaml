@@ -15,14 +15,14 @@ productsNetworkingOffline:
 products-green:
   replicaCount: 1
   image:
-    tag: v1
+    tag: v1.0.0
   discountsApi:
     #has to change when product on/offline change
     url: http://discounts-umbrella-offline:8080 
 products-blue:
   replicaCount: 2
   image:
-    tag: v1
+    tag: v1.0.0
   discountsApi:
     #has to change when product on/offline change
     url: http://discounts-umbrella-online:8080
@@ -30,11 +30,11 @@ products-blue:
 discounts-green:
   replicaCount: 1
   image:
-    tag: v2
+    tag: v1.0.0
 discounts-blue:
   replicaCount: 2
   image:
-    tag: v2
+    tag: v1.0.0
 
 global:
   istio:
