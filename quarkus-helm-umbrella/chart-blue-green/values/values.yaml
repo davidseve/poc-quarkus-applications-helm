@@ -13,7 +13,7 @@ productsNetworkingOffline:
     enabled: true
 
 products-green:
-  replicaCount: 0
+  replicaCount: 2
   image:
     tag: v1.1.1
   mode: online
