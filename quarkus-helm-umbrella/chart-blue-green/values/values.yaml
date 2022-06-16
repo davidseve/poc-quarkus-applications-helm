@@ -8,7 +8,7 @@ productsNetworkingOnline:
   router:
     enabled: true
 productsNetworkingOffline:
-  version: green
+  version: blue
   router:
     enabled: true
 
@@ -18,10 +18,10 @@ products-green:
     tag: v1.1.1
   mode: online
 products-blue:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    tag: v1.0.1
-  mode: online
+    tag: v1.1.1
+  mode: offline
 
 discounts-green:
   replicaCount: 1
